@@ -756,7 +756,7 @@ function moveDucklings() {
             ducklings[0].x += 2 * Math.cos(ducklings[0].dir-Math.PI);
             ducklings[0].y += 2 * Math.sin(ducklings[0].dir-Math.PI);
 
-            ducklings[0].growth+=0.04;
+            ducklings[0].growth+=0.02;
         }
 
         for (let key = 1; key < ducklings.length; key++) {
@@ -788,7 +788,7 @@ function moveDucklings() {
 
                 ducklings[key].x += 2 * Math.cos(ducklings[key].dir-Math.PI);
                 ducklings[key].y += 2 * Math.sin(ducklings[key].dir-Math.PI);
-                ducklings[key].growth+=0.04;
+                ducklings[key].growth+=0.02;
 
             }
         }
