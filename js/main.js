@@ -86,6 +86,8 @@ function restart() {
     player.path=[];
     dead=false;
     Points=0;
+    audio
+    bgAudio.playBackRate=0.7;
     $("#gameOver").css("display","none");
     $("#pauseButton").css("display","block");
     $("#mainMenu").css("display","none");
