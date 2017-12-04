@@ -871,8 +871,8 @@ function movePlayer() {
     }
     if (downClicked) {
 
-        player.accX += 0.01 * Math.log(ducklings.length)/1.5 * Math.cos(player.dir);
-        player.accY += 0.01 * Math.log(ducklings.length)/1.5 * Math.sin(player.dir);
+        player.accX += 0.01 * Math.log(Math.max(4,ducklings.length))/1.5 * Math.cos(player.dir);
+        player.accY += 0.01 * Math.log(Math.max(4,ducklings.length))/1.5 * Math.sin(player.dir);
     }
     if (leftClicked) {
 
