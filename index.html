@@ -29,52 +29,101 @@
     <body>
         <button class='muteButton' style='position:absolute;right:80px;top:16px;z-index:100' onclick="muteAudio()"><img src="img/audio.png"/></button>
         <button class='muteButton' style='position:absolute;right:16px;top:16px;z-index:100' onclick="muteMusic()"><img src="img/music.png"/></button>
+    <div id="HUD">
 
+        <button class='muteButton' style='width:128px;position:absolute;right:16px;bottom:16px;z-index:100' onclick="showHitboxes()">Show Hit-Boxes</button>
+    </div>
         <button id="pauseButton" class='pauseButton' style='position:absolute;left:16px;top:16px;z-index:100' onclick="pause()"><img src="img/pause.png"/></button>
-        <div id="instructions" >Instructions: </br>
+        <div class='dialog' id="instructions" >Instructions: </br>
             <p>Use Arrow keys to Move.</p>
             <p>Get Points by Mating with other Ducks!</p>
             <p>It's Your Task to Keep them safe until they are fully grown!</p>
+            <p>Eating toast will evenly grow your ducklings.</p>
             <p>The more ducklings you have the more points you will receive.</p>
-            <p>But be careful with those nasty Crocodiles!</p>
+            <p>But be careful with those nasty Crocodiles and Snakes!</p>
             <p>They will eat your children and even you if you don't watch out!</p>
             <button class="menuButton" style='margin-left:0px' onclick="hideInstructions()">Close</button>
         </div>
-        <div id="firstTime" >Welcome to the Game!</br>
+        <div class='dialog' id="changelog" >Changelog: </br>
+            <p><b><u>8.12.17</u></b></p>
+
+            <!-- <p>- Chicks only grow up by feeding them now. Press Space to feed.</p> -->
+            <p>- Added Toast-Slices: Required pickup to grow your ducklings</p>
+            <p>- Crocodiles now slightly turn towards you to make it more difficult</p>
+            <p>- You can now knock crocodiles out by hitting the back of their heads!</p>
+            <p>- Added Snakes as additional enemies.</p>
+            <p>- Added blood splatter.</p>
+            <p>- Made player trail prettier.</p>
+            <p>- Added option to display hitboxes.</p>
+            <p>- Ducks now reappear at the place they disappeared.</p>
+            <p>- Ducklings now also become faster the more ducklings you have.</p>
+            <p>- Added Background Waves.</p>
+            <button class="menuButton" style='margin-left:0px' onclick="hideChangelog()">Close</button>
+        </div>
+        <div class='dialog' id="firstTime" >Welcome to the Game!</br>
             <p>This little game was made by bewelge in little over 24 hours for the Ludum Dare #40 compo</p>
         </br>
             <p>Use Arrow keys to Move.</p>
             <p>Get Ducklings by Mating with other Ducks!</p>
             <p>It's Your Task to Keep them safe until they are fully grown!</p>
+            <p>Eating toast will evenly grow your ducklings.</p>
             <p>The more Ducklings you have the more points you will receive.</p>
-            <p>But be careful with those nasty Crocodiles!</p>
+            <p>But be careful with those nasty Crocodiles and Snakes!</p>
             <p>They will eat your children and even you if you don't watch out!</p>
             <button class="menuButton" style='margin-left:0px' onclick="hideFirstTime()">Close</button>
         </div>
-        <div id="credits" >Credits: </br>
-            <p>Game was made in its entirety by bewelge for the Ludum Dare #40 Compo </p>
-            <p>with the exception of the Font: "Ranchers" from Google Fonts</p>
+        <div class='dialog' id="credits" >Credits: </br>
+            <p>Game was made in its entirety by bewelge, originally for the Ludum Dare #40 Compo </p>
+            <p><a href="https://ldjam.com/events/ludum-dare/40/ducks">LDJam Link</a></p>
+
 
             <button class="menuButton" style='margin-left:0px' onclick="hideCredits()">Close</button>
         </div>
         <div id="gameOver" class="menuScreen" style="position:absolute;display:none;left:0;top:0;width:100%;height:100%;z-index:99">
             <div style="width:100%;text-align:center;" id="killMessage"></div>
-            <div id="scoreBoard" style="height:40%;text-align:center">
-                <div style="text-align:left">Final Score: <span style="float:right" id="scoreFinal"></span></div>
+            <div style='height:10%' class="buttons">
+            <button style='float:left;margin-left:5%' class="gameOverButton" onclick="restart()">Restart</button>
+            <p style="float:left;width:70%"><span><span class="newHighscore">new </span> High-Score: <span id="highscore"></span><span class="newHighscore">!!</span></span></p>
+            <button style='float:right;margin-right:5%' class="gameOverButton" onclick="mainMenu()">Main Menu</button>
+            </div>
+            
+            <div id="scoreBoard" style="text-align:center">
+
+                <div class='scoreLine' style="text-align:left">Final Score: <span style="float:right" id="scoreFinal"></span></div>
                 </br>
 
-                <div style="text-align:left">Ducklings Created: <span style="float:right" id="scoreCreated"></span> </div></br>
-                <div style="text-align:left">Successfully Raised: <span style="float:right" id="scoreRaised"></span> </div></br>
-                <div style="text-align:left">Eaten by Crocodiles:<span style="float:right" id="scoreEaten"></span> </div></br>
-                <div style="text-align:left">Survival Rate: <span style="float:right" id="scoreSurvival"></span></div></br>
-                <div style="text-align:left">Most Ducklings at once:<span style="float:right" id="scoreLongestChain"></span></div></br>
+                <div class='scoreLine' style="text-align:left">Ducklings Created: <span style="float:right" id="scoreCreated"></span> </div></br>
+                <div class='scoreLine' style="text-align:left">Successfully Raised: <span style="float:right" id="scoreRaised"></span> </div></br>
+                <div class='scoreLine' style="text-align:left">Eaten by Crocodiles:<span style="float:right" id="scoreCrocEaten"></span> </div></br>
+                <div class='scoreLine' style="text-align:left">Eaten by Snakes:<span style="float:right" id="scoreSnakeEaten"></span> </div></br>
+                <div class='scoreLine' style="text-align:left">Eaten Total:<span style="float:right" id="scoreEaten"></span> </div></br>
+                <div class='scoreLine' style="text-align:left">Survival Rate: <span style="float:right" id="scoreSurvival"></span></div></br>
+                <div class='scoreLine' style="text-align:left">Most Ducklings at once:<span style="float:right" id="scoreLongestChain"></span></div></br>
 
             </div>
-            <p style="height:10%"><span><span class="newHighscore">new </span> High-Score: <span id="highscore"></span><span class="newHighscore">!!</span></span></p>
-            <div style='height:40%' class="buttons">
-            <button class="menuButton" onclick="restart()">Restart</button>
-            <button class="menuButton" onclick="mainMenu()">Main Menu</button>
-            </div>
+            <!--<div id="Quests" class="">
+                <div style="border-radius:0.2em;background-color:rgba(255,255,255,0.5);text-align:center;width:100%;font:20px 'Ranchers'"><u>Quests:</u></div>
+
+
+                    <div id="quest1">
+                        <span class="questTitle">Quest 123</span>
+                        <span class="questDescription">Kill 5 Crocodiles</span></br>
+                        <div>
+                        <div class="questSkip">Skip</div>
+                        <div class="questBar"><div class="questBarProgress">3 / 5</div></div>
+                        <div class="questReward">100GP</div>
+                        </div>
+
+                    </div>
+
+
+
+            </div>-->
+
+            
+
+        </div>
+        <div id="pauseScreen" style='display:none' class="menuScreen">
 
         </div>
         <div id="mainMenu" class="menuScreen">
@@ -82,6 +131,7 @@
             <div class="" style="width:100%;height:80%">
                 <button onclick="restart()" class="menuButton">Start</button>
                 <button onclick="showInstructions()" class="menuButton">Instructions</button>
+                <button onclick="showChangelog()" class="menuButton">Changelog</button>
                 <button onclick="showCredits()" class="menuButton">Credits</button>
             </div>
 
